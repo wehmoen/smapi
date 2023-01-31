@@ -1,0 +1,27 @@
+{
+  "name": "@wehmoen/smapi",
+  "version": "1.0.1",
+  "description": "A library for APIs provided by SkyMavis.",
+  "main": "index.js",
+  "keywords": [
+    "skymavis",
+    "restapi",
+    "developer-portal",
+    "axieinfinity",
+    "ronin",
+    "roninchain"
+  ],
+  "authors": [
+    {
+      "name": "Nico Wehmöller",
+      "email": "nico.wehmoller@skymavis.com"
+    }
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "web3": "^1.8.1"
+  }
+}

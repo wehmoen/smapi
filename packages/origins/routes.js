@@ -1,0 +1,16 @@
+module.exports = new Map([
+    ["listAllRunes", "community/runes"],
+    ["getRuneById", "community/runes/:id"],
+    ["listAllCharms", "community/charms"],
+    ["getCharmById", "community/charms/:id"],
+    ["listAllItems", "community/items"],
+    ["getItemById", "community/items/:id"],
+    ["listUserItems", "community/users/items"],
+    ["listChapterCleared", "community/users/chapters"],
+    ["listNodesCleared", "community/users/nodes"],
+    ["listUserFighters", "community/users/fighters"],
+    ["listUserFightersConfigs", "community/users/fighters/configs"],
+    ["listLeaderboards", "community/leaderboards"],
+    ["listBurnedItems", "community/users/:userId/items/burned"],
+    ["listAllCards", "community/cards"],
+])
