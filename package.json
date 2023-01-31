@@ -17,6 +17,16 @@
       "email": "nico.wehmoller@skymavis.com"
     }
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wehmoen/smapi.git"
+  },
+  "funding": {
+    "type": "ronin",
+    "url": "ronin:745dd2269a73701e662f217e2e10eb5a4755246b"
+  },
+  "homepage": "https://developers.skymavis.com/",
+  "bugs": "https://github.com/wehmoen/smapi/issues",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
