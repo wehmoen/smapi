@@ -1,16 +1,27 @@
 const {BaseAPI} = require("../../lib");
 const routes = require("./routes.js");
 
+const Axie = require("./contracts/axie");
+
 module.exports = class JsonRpc extends BaseAPI {
 
-    #requestCounter;
+    #requestCounter = 0;
+    contracts = {};
 
-    constructor(apiKey) {
-        super(apiKey, routes, "https://rpc2.ronin.rest", true);
-        this.#requestCounter = 1;
+    constructor(apiKey, useWebsocket = false) {
+        let RPC = "https://rpc2.ronin.rest"
+        super(apiKey, routes, RPC, true);
+
+        if (useWebsocket) {
+            RPC = RPC.replace("https://", "wss://") + "/ronin-mainnet/ws"
+        } else {
+            RPC += "/ronin-mainnet"
+        }
+
+        this.contracts.Axie = new Axie.Axie(RPC);
     }
 
-    #fixPrefix(address) {
+    static fixPrefix(address) {
         return address.replace("ronin:", "0x");
     }
 
@@ -74,8 +85,8 @@ module.exports = class JsonRpc extends BaseAPI {
                 "mainnet",
                 {
                     body: this.#createRPCRequest("eth_estimateGas", [{
-                        from: this.#fixPrefix(from),
-                        to: this.#fixPrefix(to),
+                        from: JsonRpc.fixPrefix(from),
+                        to: JsonRpc.fixPrefix(to),
                         value,
                         data,
                     }]),
@@ -89,7 +100,7 @@ module.exports = class JsonRpc extends BaseAPI {
             this.post(
                 "mainnet",
                 {
-                    body: this.#createRPCRequest("eth_getBalance", [this.#fixPrefix(address), block]),
+                    body: this.#createRPCRequest("eth_getBalance", [JsonRpc.fixPrefix(address), block]),
                 }
             )
         )
@@ -100,7 +111,7 @@ module.exports = class JsonRpc extends BaseAPI {
             this.post(
                 "mainnet",
                 {
-                    body: this.#createRPCRequest("eth_getCode", [this.#fixPrefix(address), block]),
+                    body: this.#createRPCRequest("eth_getCode", [JsonRpc.fixPrefix(address), block]),
                 }
             )
         )
@@ -111,7 +122,7 @@ module.exports = class JsonRpc extends BaseAPI {
             this.post(
                 "mainnet",
                 {
-                    body: this.#createRPCRequest("eth_getTransactionCount", [this.#fixPrefix(address), block]),
+                    body: this.#createRPCRequest("eth_getTransactionCount", [JsonRpc.fixPrefix(address), block]),
                 }
             )
         )

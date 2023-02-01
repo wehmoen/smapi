@@ -23,10 +23,10 @@ class SkyMavisAPI {
      * @type {JsonRpc}
      */
     jsonRpc;
-    constructor(apiKey) {
+    constructor(apiKey, useWebsocket = false) {
         this.explorer = new explorer(apiKey);
         this.origins = new origins(apiKey);
-        this.jsonRpc = new jsonRpc(apiKey);
+        this.jsonRpc = new jsonRpc(apiKey, useWebsocket);
     }
 
     apiVersion() {
